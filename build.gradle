@@ -1,19 +1,30 @@
 plugins {
     id 'java'
+    id 'idea'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
 group 'ca.virtualhdgaming'
-version '1.0-SNAPSHOT'
+version '0.0.1'
+
+sourceCompatibility = targetCompatibility = 17
+compileJava.options.encoding = 'UTF-8'
 
 repositories {
+    mavenLocal()
     mavenCentral()
+    maven {  url 'https://papermc.io/repo/repository/maven-public/' }
+    maven { url 'https://jitpack.io' }
+    maven { url 'https://repo.codemc.org/repository/maven-public/'}
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
-}
-
-test {
-    useJUnitPlatform()
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
+    implementation 'org.mongodb:mongodb-driver:3.12.11'
+    implementation 'org.jetbrains:annotations:20.1.0'
+    testImplementation 'com.google.guava:guava:31.1-jre'
+    compileOnly("io.papermc.paper:paper-api:1.19.2-R0.1-SNAPSHOT")
+    compileOnly('org.spigotmc:spigot:1.19.2-R0.1-SNAPSHOT'){
+        exclude group: 'org.spigotmc', module: 'spigot-api'
+    }
 }
